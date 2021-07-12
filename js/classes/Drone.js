@@ -18,8 +18,6 @@ class Drone {
       )
     );
 
-    p.ellipse(predictedPos.x, predictedPos.y, 10);
-
     let desiredVel = Vector.sub(predictedPos, this.pos);
 
     let acc = Vector.sub(desiredVel, this.vel).limit(this.maxForce);

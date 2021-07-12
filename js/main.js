@@ -11,6 +11,7 @@ let x = p.random();
 // Graphical stuff
 let WIDTH = 1200;
 let HEIGHT = 500;
+let gridSize = 100;
 
 // Useful stuff :P
 let drones = [];
@@ -24,7 +25,7 @@ for (let i = 0; i < 10; i++) {
 }
 */
 drones.push(new Drone(
-  new p5.Vector(50, HEIGHT / 2),
+  new p5.Vector(-WIDTH/2 + 50),
   p5.Vector.random2D(),
   null
 ));
@@ -39,6 +40,6 @@ launchers.push(new Launcher(
 
 let targets = [];
 targets.push(new Target(
-  new p5.Vector(WIDTH / 2, HEIGHT / 2)
+  new p5.Vector(0, 0)
 ));
 drones[0].target = targets[0];
