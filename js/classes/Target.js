@@ -12,6 +12,7 @@ class Target {
 
   display() {
     p.stroke(255);
+    p.strokeWeight(1);
     p.noFill();
     p.ellipse(this.pos.x, this.pos.y, 20, 20);
   }

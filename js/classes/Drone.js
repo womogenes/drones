@@ -31,6 +31,7 @@ class Drone {
 
   display() {
     p.stroke(255);
+    p.strokeWeight(1);
     p.noFill();
 
     p.push();

@@ -1,6 +1,6 @@
 const drawGrid = () => {
   p.stroke(128);
-  p.strokeWeight(1);
+  p.strokeWeight(camera.zoom);
 
   let xstart = (camera.camx) % (camera.zoom * gridSize);
   for (let x = xstart; x < WIDTH; x += gridSize * camera.zoom) {
