@@ -2,21 +2,27 @@ class Drone {
   constructor(pos, vel, target) {
     this.pos = pos;
     this.vel = vel;
-    this.maxSpeed = 3;
+    this.maxSpeed = 5;
     this.maxForce = 0.1;
-    this.target = target;
     this.health = 1;
+    this.target = target;
   }
 
-  navigate() {
-    let predictedPos = Vector.add(
-      this.target.pos,
-      Vector.mult(
-        this.target.vel, 
-        p.dist(this.pos.x, this.pos.y, this.target.pos.x, this.target.pos.y) 
-          / this.vel.mag() * 1
-      )
-    );
+  navigate(targetPos, targetVel) {
+    // Static vs moving target
+    let predictedPos;
+    if (!targetVel) {
+      predictedPos = targetPos;
+    } else {
+      predictedPos = Vector.add(
+        targetPos,
+        Vector.mult(
+          targetVel,
+          p.dist(this.pos.x, this.pos.y, targetPos.x, targetPos.y) 
+            / this.vel.mag() * 0.1
+        )
+      );
+    }
 
     let desiredVel = Vector.sub(predictedPos, this.pos);
 
@@ -26,13 +32,38 @@ class Drone {
   }
 
   update() {
+    if (!this.target || this.target.health <= 0) {
+      this.target = Drone.locateClosestEnemy(this.pos);
+    }
+
+    if (this.target === null) {
+      this.navigate(base.pos, null);
+    } else {
+      this.navigate(this.target.pos, this.target.vel);
+    }
+
     this.pos.add(this.vel);
+  }
+
+  static locateClosestEnemy(pos) {
+    // Find closest enemy drone
+    let minDist = Infinity;
+    let closestEnemy = null;
+    for (let d of enemy.drones) {
+      let dist = p.dist(pos.x, pos.y, d.pos.x, d.pos.y);
+      if (dist < minDist) {
+        minDist = dist;
+        closestEnemy = d;
+      }
+    }
+
+    return closestEnemy;
   }
 
   display() {
     p.stroke(255);
+    p.fill('#61b5ff80');
     p.strokeWeight(1);
-    p.noFill();
 
     p.push();
     p.translate(this.pos.x, this.pos.y);

@@ -5,8 +5,8 @@ const setupInput = () => {
   };
 
   p.mousePressed = () => {
-    xOffset = p.mouseX - camera.camx;
-    yOffset = p.mouseY - camera.camy;
+    xOffset = p.mouseX - camera.x;
+    yOffset = p.mouseY - camera.y;
   };
 
   p.mouseWheel = event => {

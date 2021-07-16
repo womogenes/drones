@@ -1,7 +1,8 @@
 class Launcher {
-  constructor(pos, dir) {
+  constructor(pos, dir, team) {
     this.pos = pos;
     this.dir = dir;
+    this.team = team;
   }
 
   update() {

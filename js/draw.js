@@ -1,17 +1,13 @@
 const _draw = () => {
   p.background(20);
 
-  drones = drones.filter(d => {
-    if (d.health > 0) return true;
-  });
+  // Updates
+  base.update();
+  enemy.update();
 
-  for (let d of drones) {
-    d.navigate(new p5.Vector(p.mouseX, p.mouseY));
-  }
-
-  for (let l of launchers) { l.update(); }
-  for (let t of targets) { t.update(); }
-  for (let d of drones) { d.update(); }
+  updateCollisions();
+  for (let e of explosions) { e.update(); }
+  explosions = explosions.filter(e => e.opacity > 0);
 
   // Display everything
   updateCamera();
@@ -21,14 +17,24 @@ const _draw = () => {
 
   // Inside-transformation stuff  
   p.push();
-  p.translate(camera.camx, camera.camy);
+  p.translate(camera.x, camera.y);
   p.scale(camera.zoom);
 
-  p.ellipse(0, 0, 20, 20);
+  base.display();
+  enemy.display();
 
-  for (let l of launchers) { l.display(); }
-  for (let d of drones) { d.display(); }
-  for (let t of targets) { t.display(); }
+  for (let e of explosions) { e.display(); }
 
   p.pop();
+
+  // More outside-transformation stuff
+  p.strokeWeight(20);
+  p.stroke(64);
+  p.line(50, 50, WIDTH - 50, 50);
+  p.strokeWeight(10);
+  p.stroke(0);
+  let length = Math.max(0, (WIDTH - 100) * base.health);
+  p.line(50, 50, 50 + length, 50);
+  p.stroke(200);
+  p.line(50, 50, 50 + length, 50);
 };
