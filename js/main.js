@@ -15,8 +15,8 @@ let gridSize = 100;
 // Useful stuff :P
 let base = new Base(
   new Vector(0, 0),
-  60
+  2
 );
-let enemy = new Enemy(60);
+let enemy = new Enemy(30);
 
 let explosions = [];

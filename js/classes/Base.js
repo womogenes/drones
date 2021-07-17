@@ -16,7 +16,7 @@ class Base {
     for (let d of this.drones) { d.update(); }
     this.drones = this.drones.filter(d => d.health > 0);
 
-    if (enemy.drones.length > 0 && p.frameCount % this.reload === 1) {
+    if (enemy.drones.length > this.drones.length * 0.1 && p.frameCount % this.reload === 1) {
       this.drones.push(new Drone(
         this.pos.copy(),
         new Vector(1, p.random(-1, 1)),

@@ -9,12 +9,12 @@ const screenToSpace = (x, y) => {
 
 const setupCamera = () => {
   camera = {
-    tox: 150,
+    tox: WIDTH / 2,
     toy: HEIGHT / 2,
-    x: 150,
+    x: WIDTH / 2,
     y: HEIGHT / 2,
     zoom: 1,
-    minzoom: 0.5,
+    minzoom: 0.2,
     maxzoom: 10,
     tozoom: 1,
     dzoom: 0.5,

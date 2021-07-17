@@ -19,7 +19,7 @@ class Drone {
         Vector.mult(
           targetVel,
           p.dist(this.pos.x, this.pos.y, targetPos.x, targetPos.y) 
-            / this.vel.mag() * 0.1
+            / this.vel.mag() * 0.5
         )
       );
     }
@@ -32,7 +32,7 @@ class Drone {
   }
 
   update() {
-    if (!this.target || this.target.health <= 0) {
+    if (true || !this.target || this.target.health <= 0) {
       this.target = Drone.locateClosestEnemy(this.pos);
     }
 
