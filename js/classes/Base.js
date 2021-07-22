@@ -19,7 +19,7 @@ class Base {
     if (enemy.drones.length > this.drones.length * 0.1 && p.frameCount % this.reload === 1) {
       this.drones.push(new Drone(
         this.pos.copy(),
-        new Vector(1, p.random(-1, 1)),
+        Vector.random2D().mult(1),
         null
       ));
     }

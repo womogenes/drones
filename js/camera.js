@@ -14,7 +14,7 @@ const setupCamera = () => {
     x: WIDTH / 2,
     y: HEIGHT / 2,
     zoom: 1,
-    minzoom: 0.2,
+    minzoom: 0.5,
     maxzoom: 10,
     tozoom: 1,
     dzoom: 0.5,

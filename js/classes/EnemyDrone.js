@@ -5,6 +5,7 @@ class EnemyDrone extends Drone {
 
   update() {
     this.navigate(base.pos, null);
+    this.vel.limit(this.maxSpeed);
     this.pos.add(this.vel);
   }
 

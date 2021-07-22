@@ -19,7 +19,7 @@ class Drone {
         Vector.mult(
           targetVel,
           p.dist(this.pos.x, this.pos.y, targetPos.x, targetPos.y) 
-            / this.vel.mag() * 0.5
+            / (this.vel.mag() + 1) * 0.5
         )
       );
     }
@@ -28,7 +28,6 @@ class Drone {
 
     let acc = Vector.sub(desiredVel, this.vel).limit(this.maxForce);
     this.vel.add(acc);
-    this.vel.limit(this.maxSpeed);
   }
 
   update() {
@@ -42,6 +41,17 @@ class Drone {
       this.navigate(this.target.pos, this.target.vel);
     }
 
+    // Separate
+    for (let d of base.drones) {
+      if (d == this) continue;
+      let dist = p.dist(d.pos.x, d.pos.y, this.pos.x, this.pos.y);
+      if (dist < 20) {
+        let toAdd = Vector.sub(this.pos, d.pos).div(dist * dist);
+        this.vel.add(toAdd);
+      }
+    }
+
+    this.vel.limit(this.maxSpeed);
     this.pos.add(this.vel);
   }
 
